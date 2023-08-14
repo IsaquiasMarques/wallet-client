@@ -1,0 +1,40 @@
+header{
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
+}
+.logo h1{
+    font-family: 'Fist';
+    font-size: 30px;
+    color: var(--primary-color);
+}
+nav{}
+nav ul{}
+nav ul li{}
+nav ul li a{
+    color: #26292a;
+    transition: .2s;
+}
+nav ul li a:hover{
+    color: var(--primary-color);
+}
+
+li a.highlight{
+    padding: 10px 20px;
+    border-radius: 5px;
+    /* text-transform: uppercase; */
+}
+
+li a.highlight.active{
+    background-color: var(--primary-color);
+    color: #fff !important;
+    border: 2px solid var(--primary-color);
+}
+li a.highlight.active:hover{
+    background-color: #fff;
+    color: var(--primary-color) !important;
+}
+
+li a.highlight.inactive{
+    color: var(--primary-color) !important;
+    background-color: #fff;
+    border: 2px solid #efeff1;
+}

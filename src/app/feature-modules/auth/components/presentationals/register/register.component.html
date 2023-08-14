@@ -1,0 +1,29 @@
+<div class="content-panel">
+    <div class="section-title">
+        <h1 class="text-[23px] laptop:text-[30px] text-[#26292a] font-bold leading-[30px] laptop:leading-[35px] w-full">
+            Criar uma conta
+        </h1>
+    </div>
+    <div class="form mt-7">
+        <form
+        [formGroup]="this.registerGroup"
+        (submit)="this.onSubmit()"
+        method="POST"
+        >
+            <div class="input">
+                <input type="email" placeholder="Email" formControlName="email">
+            </div>
+            <div class="input">
+                <input type="password" placeholder="Senha" formControlName="password">
+            </div>
+            <div class="change-method">
+                <p class="text-[14px] text-[#aaa]">
+                    Já possui uma conta? <a routerLink="/auth/login" class="text-primary cursor-pointer">Entrar na minha conta</a>
+                </p>
+            </div>
+            <div class="input-button mt-3">
+                <button type="submit" [disabled]="this.registerGroup.invalid">Criar conta</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<header class="fixed w-full top-0 left-0 py-5 bg-white">
+    <div class="contain w-[90%] mx-auto max-w-[1536px] desktop:w-[75%] flex justify-between items-center">
+        <div class="logo">
+            <h1 class="">Wallet</h1>
+        </div>
+        <div class="menu-mobile-icon desktop:hidden">
+            <a href="">
+                <img src="assets/svg/icons/header/menu-mobile-icon.svg" alt="">
+            </a>
+        </div>
+        <div class="menu-nav-bar hidden desktop:block">
+            <nav>
+                <ul class="flex flex-row gap-10 justify-center items-center">
+                    <li><a routerLink="../">Sobre a Wallet</a></li>
+                    <li><a href="https://fridoom.com" target="_blank">Ecossistema Fridoom</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="menu-nav-bar-highlights hidden desktop:block">
+            <nav>
+                <ul class="flex flex-row gap-3 justify-center items-center">
+                    <li><a routerLink="/auth/login" class="highlight inactive">Já tenho conta</a></li>
+                    <li><a routerLink="/auth/register" class="highlight active">Criar conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<section class="section-content">
+    <div class="section-contain w-[90%] mx-auto max-w-[1536px] desktop:w-[75%]">
+        <router-outlet></router-outlet>
+    </div>
+</section>
