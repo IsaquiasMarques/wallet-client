@@ -22,7 +22,16 @@
                 </p>
             </div>
             <div class="input-button mt-3">
-                <button type="submit" [disabled]="this.registerGroup.invalid">Criar conta</button>
+                <button type="submit" [disabled]="this.registerGroup.invalid" class="flex justify-center items-center">
+                    <p
+                    class=""
+                    *ngIf="!(this.authFacade.registerIsLoading$ | async)"
+                    >Criar conta</p>
+                    <img
+                    src="assets/svg/icons/loading/loading-circle.svg"
+                    *ngIf="(this.authFacade.registerIsLoading$ | async)"
+                    width="24" height="24" alt="">
+                </button>
             </div>
         </form>
     </div>

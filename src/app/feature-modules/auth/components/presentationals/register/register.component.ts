@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserRegisterInterface } from '../../../models/user-register.model';
 import { AuthFacade } from '../../../auth.facade';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -10,11 +11,10 @@ import { AuthFacade } from '../../../auth.facade';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
   constructor(
-    private authFacade: AuthFacade
+    public authFacade: AuthFacade
   ) { }
-
+  
   registerGroup: any;
 
   ngOnInit(): void {

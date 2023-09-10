@@ -17,21 +17,21 @@ export class AuthApiService {
   ) { }
 
   csrf_sanctum(): Observable<any>{
-    return this.http.get<any>(CSRF, { observe: 'response' ,withCredentials: true });
+    return this.http.get<any>(CSRF, { observe: 'response', withCredentials: true })
+                    .pipe(
+                      map(() => {
+                        const headers =  new HttpHeaders({
+                          'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN')
+                        });
+                        return headers;
+                      })
+                    );
   }
 
   user_register(user: UserRegisterInterface): Observable<any>{
-    
-    return this.csrf_sanctum().pipe(
-      // tap(data => console.log(this.cookieService.get('XSRF-TOKEN'))),
-      map(() => {
-        const headers =  new HttpHeaders({
-          'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN')
-        });
-        return this.http.post<any>(REGISTER, user, { withCredentials: true, headers: headers }).subscribe(console.log)
-      })
-    );
-  } 
+    this.csrf_sanctum().subscribe();
+    return this.http.post<any>(REGISTER, user, { withCredentials: true });
+  }
 
   user_login(user: UserLoginInterface){}
 

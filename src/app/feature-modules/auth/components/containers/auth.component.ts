@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { APP } from '@core/config/app.config';
 
 @Component({
   selector: 'app-auth',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
+  appName: string = APP.NAME;
+  
   constructor() { }
 
   ngOnInit(): void {
