@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { AuthApiService } from "./api/auth.api.service";
 import { UserLoginInterface } from "./models/user-login.model";
 import { UserRegisterInterface } from "./models/user-register.model";
-import { UserService } from "@core/services/user.service";
+import { UserService } from "@core/services/user/user.service";
 import { BehaviorSubject } from "rxjs";
+import { ErrorService } from "@shared/services/error/error.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,12 @@ export class AuthFacade {
   userRegistered: any;
 
   registerIsLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  registerHasErrors$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  registerHasErrors$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(
     private auth_api: AuthApiService,
-    private user: UserService
+    private user: UserService,
+    private Error: ErrorService
   ) { }
 
   login(user: UserLoginInterface){
@@ -31,19 +33,25 @@ export class AuthFacade {
     this.auth_api.user_register(user).subscribe(
       {
         next: (response: any) => {
-          console.log(response)
+          // console.log(response)
+          this.user.authenticate(response.data.user);
         },
         complete: () => {
           this.registerIsLoading$.next(false)
         },
         error: (errors: any) => {
-          this.registerHasErrors$.next(errors)
-          console.log(errors.error);
+          this.registerHasErrors$.next([errors.error.message]);
+          this.emptyErrorsAfterFewSeconds();
+          this.registerIsLoading$.next(false);
         },
       }
     );
-    // console.log(this.userRegistered);
-    // this.user.authenticate(this.userRegistered);
+  }
+
+  emptyErrorsAfterFewSeconds(time: number = 4){
+    setTimeout(() => {
+      this.registerHasErrors$.next([]);
+    }, time * 1000);
   }
 
   unsubscribe(){

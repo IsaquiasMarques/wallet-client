@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/presentationals/register/registe
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientXsrfModule } from '@angular/common/http';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { HttpClientXsrfModule } from '@angular/common/http';
     RegisterComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,

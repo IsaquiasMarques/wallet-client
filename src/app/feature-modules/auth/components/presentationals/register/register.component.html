@@ -5,6 +5,16 @@
         </h1>
     </div>
     <div class="form mt-7">
+
+        <app-alert-with-list
+        [visible]="((this.authFacade.registerHasErrors$ | async).length > 0) ? true : false "
+        [kind]="'error'"
+        [strongSpan]="'Erro ao criar esta conta:'"
+        [span]="'Erro de cadastramento'"
+        [list]="(this.authFacade.registerHasErrors$ | async)"
+        class="transition-[.6s]"
+        />
+
         <form
         [formGroup]="this.registerGroup"
         (submit)="this.onSubmit()"
