@@ -25,12 +25,12 @@ export class AuthFacade {
   ) { }
 
   login(user: UserLoginInterface){
-    this.loginSubscriber = this.auth_api.user_login(user);
+    this.loginSubscriber = this.auth_api.login(user);
   }
 
   register(user: UserRegisterInterface){
     this.registerIsLoading$.next(true);
-    this.auth_api.user_register(user).subscribe(
+    this.auth_api.register(user).subscribe(
       {
         next: (response: any) => {
           // console.log(response)
@@ -40,8 +40,8 @@ export class AuthFacade {
           this.registerIsLoading$.next(false)
         },
         error: (errors: any) => {
-          this.registerHasErrors$.next([errors.error.message]);
-          this.emptyErrorsAfterFewSeconds();
+          this.registerHasErrors$.next([errors.error.message ?? errors.message]);
+          this.emptyErrorsAfterFewSeconds(40);
           this.registerIsLoading$.next(false);
         },
       }
